@@ -18,7 +18,13 @@ mongoose.connect(process.env.MONGODB_URI)
 // Routes
 app.use('/api/tasks', require('./routes/taskRoutes'));
 
+app.get('/', (req, res)=>{
+  res.json("API Working Properly")
+})
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = app;

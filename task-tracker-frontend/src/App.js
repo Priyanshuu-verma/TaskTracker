@@ -16,7 +16,7 @@ function App() {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/tasks');
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/tasks`);
       setTasks(res.data);
     } catch (err) {
       console.error(err);
@@ -25,7 +25,7 @@ function App() {
 
   const addTask = async (task) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/tasks', task);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/tasks`, task);
       setTasks([...tasks, res.data]);
     } catch (err) {
       console.error(err);
@@ -34,7 +34,7 @@ function App() {
 
   const updateTask = async (id, completed) => {
     try {
-      await axios.put(`http://localhost:5000/api/tasks/${id}`, { completed });
+      await axios.put(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/tasks/${id}`, { completed });
       setTasks(tasks.map(task => 
         task._id === id ? { ...task, completed } : task
       ));
@@ -45,7 +45,7 @@ function App() {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/tasks/${id}`);
       setTasks(tasks.filter(task => task._id !== id));
     } catch (err) {
       console.error(err);

@@ -4,11 +4,14 @@ import axios from 'axios';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import About from './components/About';
 import './App.css';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     fetchTasks();
@@ -35,7 +38,7 @@ function App() {
   const updateTask = async (id, completed) => {
     try {
       await axios.put(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/tasks/${id}`, { completed });
-      setTasks(tasks.map(task => 
+      setTasks(tasks.map(task =>
         task._id === id ? { ...task, completed } : task
       ));
     } catch (err) {
@@ -60,22 +63,20 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <Navbar filter={filter} setFilter={setFilter} />
+      <div className={darkMode ? 'App dark' : 'App'}>
+        <Navbar filter={filter} setFilter={setFilter} darkMode={darkMode} setDarkMode={setDarkMode} />
         <div className="container">
           <Routes>
             <Route path="/" element={
               <>
                 <TaskForm addTask={addTask} />
-                <TaskList 
-                  tasks={filteredTasks} 
-                  updateTask={updateTask} 
-                  deleteTask={deleteTask} 
-                />
+                <TaskList tasks={filteredTasks} updateTask={updateTask} deleteTask={deleteTask} />
               </>
             } />
+            <Route path="/about" element={<About />} />
           </Routes>
         </div>
+        <Footer />
       </div>
     </Router>
   );

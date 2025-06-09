@@ -102,3 +102,83 @@ body {
   cursor: pointer;
   margin-left: 10px;
 }
+
+
+
+
+
+
+/* Make the entire App take full height */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex-grow: 1; /* allows the main content to grow and push the footer down */
+}
+
+
+
+
+.navbar a, .navbar .btn {
+  color: white;
+}
+
+.filter-buttons button,
+.filter-buttons a {
+  margin-left: 5px;
+}
+
+
+
+
+/* Light Mode (default) */
+body, .App {
+  background-color: white;
+  color: black;
+}
+
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.navbar .btn {
+  margin-left: 5px;
+}
+
+/* Dark Mode Styles */
+.App.dark {
+  background-color: rgb(235, 188, 196);
+  color: black;
+}
+
+.App.dark .navbar {
+  background-color: pink;
+  color: #ddd;
+}
+
+.App.dark .btn-outline-light {
+  border-color: #f1f1f1;
+  color: green;
+}
+
+.App.dark .btn-outline-light:hover {
+  background-color: #f1f1f1;
+  color: #121212;
+}
+
+.App.dark input,
+.App.dark textarea {
+  background-color: #2c2c2c;
+  color: white;
+  border: 1px solid #555;
+}
